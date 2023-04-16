@@ -1,0 +1,6 @@
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: rgb(255, 255, 255); /* This ensures the header text is visible when it's sticky */
+  z-index: 100; /* Optional: this ensures the header is above other elements */
+}

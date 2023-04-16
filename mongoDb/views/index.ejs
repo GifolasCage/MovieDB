@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search</title>
+    <%- include('./partials/head.ejs') %>
+    <style>
+      .full-height {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/navbar.ejs') %>
+    <main class="container d-flex flex-column align-items-center">
+      <h1 class="display-5 text-center">Search Movie or Tv-Show</h1>
+      <div class="form-group w-50">
+        <input type="text" id="search-text" class="form-control" placeholder="Title e.g. Star Wars">
+      </div>
+      <button class="btn btn-primary m-2" onclick="getApi()">Search</button>
+      <div class="d-flex d-none border rounded p-2 m-2" id="movie-card">
+        <img class="img" src="" alt="" id="movie-poster">
+        <div class="d-flex flex-column ps-2 justify-content-between" style="width: 20rem;">
+          <div>
+            <p class="fw-bold">Title: <span class="fw-normal" id="movie-title"></span></p>
+            <p class="fw-bold">Year: <span class="fw-normal" id="movie-year"></span></p>
+            <p class="fw-bold">Plot: <span class="fw-normal" id="movie-plot"></span></p>
+            <p class="fw-bold">Rating: <span class="fw-normal" id="movie-rating"></span></p>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary" onclick="addToFavourites()">Add to favourites</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
