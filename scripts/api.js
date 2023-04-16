@@ -65,3 +65,7 @@ async function postData(url, data) {
 function addToFavourites(){
     postData('/addfavourite', {title: movieInfo.Title, year: movieInfo.Year, plot: movieInfo.Plot, rating: movieInfo.imdbRating, poster: movieInfo.Poster, type: movieInfo.Type, imdbId: movieInfo.imdbID});
 }
+
+function showItem(){
+  
+}

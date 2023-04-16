@@ -33,7 +33,7 @@
                     <td><%= serie.rating %>/10</td>
                     <td><img src="<%= serie.poster %>" alt="Series Poster" width="100"></td>
                     <td><a href="https://www.imdb.com/title/<%= serie.imdbId %>" target="_blank" class="btn btn-primary">Imdb</a></td>
-                    <td><button class="btn btn-danger" id="<%= serie._id %>" onclick="deleteEntry(this.id, 'series')">Delete</button></td>
+                    <td><button class="btn btn-danger" id="<%= serie._id %>" onclick="deleteEntry(this.id, 'series', '<%=serie.title%>')">Delete</button></td>
                 </tr>
                 <% }) %>
             </tbody>

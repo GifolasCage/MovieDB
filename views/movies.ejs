@@ -21,7 +21,7 @@
                   <th scope="col">Rating</th>
                   <th scope="col">Poster</th>
                   <th scope="col">Imdb</th>
-                  <th scope="col">Remove</th>
+                  <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,8 +32,8 @@
                     <td><%= movie.plot %></td>
                     <td><%= movie.rating %>/10</td>
                     <td><img src="<%= movie.poster %>" alt="Movie Poster" width="100"></td>
-                    v
-                    <td><button class="btn btn-danger" id="<%= movie._id %>" onclick="deleteEntry(this.id, 'movie')">Remove</button></td>
+                    <td><a href="https://www.imdb.com/title/<%= movie.imdbId %>" target="_blank" class="btn btn-primary">Imdb</a></td>
+                    <td><button class="btn btn-danger" id="<%= movie._id %>" onclick="deleteEntry(this.id, 'movie', '<%=movie.title%>')">Delete</button></td>
                 </tr>
                 <% }) %>
             </tbody>

@@ -1,4 +1,8 @@
-function deleteEntry(itemId, type) {
+function deleteEntry(itemId, type, title) {
+  let confirmation = confirm(`Are you sure you want to remove: "${title}"?`);
+  if(!confirmation){
+    return;
+  }
     fetch(`/deletefavourite/${type}/${itemId}`, {
       method: 'DELETE',
     })

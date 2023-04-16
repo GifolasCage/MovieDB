@@ -21,10 +21,8 @@ router.get('/', async function (req, res, next) {
     }
 
     const movies = await db.collection('movies').find({}).toArray();
-    const title = movies[0].title;
-    const year = movies[0].year;
 
-    res.render('index', { title: title, year: year});
+    res.render('index', {});
   } catch (error) {
     console.log('Error while fetching movies:', error);
     res.render('index', { title: 'Error fetching movie title' });
