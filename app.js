@@ -1,13 +1,20 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var passport = require('passport')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var configurePassport = require('./scripts/passportconfig');
+var flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
-var moviesRouter = require('./routes/movies')
-var seriesRouter = require('./routes/series')
+var registerRouter = require('./routes/register');
+var moviesRouter = require('./routes/movies');
+var seriesRouter = require('./routes/series');
+var logoutRouter = require('./routes/logout');
+var searchRouter = require('./routes/search');
 
 var app = express();
 
@@ -17,16 +24,30 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(flash());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/scripts'));
 
+app.use(session({
+  secret: 'extremely secret key that nobody knows',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+configurePassport(passport);
+
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/movies', moviesRouter);
 app.use('/series', seriesRouter);
+app.use('/register', registerRouter);
+app.use('/logout', logoutRouter);
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

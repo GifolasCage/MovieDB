@@ -13,17 +13,22 @@ let db;
 })();
 
 router.get('/', async function(req, res, next) {
+  if(req.user){
     try {
       if (!db) {
         throw new Error('Database connection is not established');
       }
   
-      const movies = await db.collection('movies').find({}).toArray();
-      res.render('movies', { title: 'Favorite Movies', movies: movies });
+      const movies = await db.collection(req.user.email).find({type:"movie"}).toArray();
+      res.render('movies', { title: 'Favorite Movies', movies: movies, user: req.user });
     } catch (error) {
       console.log('Error while fetching favorite movies:', error);
-      res.render('movies', { title: 'Error fetching favorite movies' });
+      res.render('movies', { title: 'Error fetching favorite movies', user: req.user });
     }
+  }
+  else{
+    res.redirect('/login');
+  }
 });
 
 module.exports = router;

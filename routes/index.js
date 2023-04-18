@@ -22,10 +22,10 @@ router.get('/', async function (req, res, next) {
 
     const movies = await db.collection('movies').find({}).toArray();
 
-    res.render('index', {});
+    res.render('index', {user: req.user });
   } catch (error) {
     console.log('Error while fetching movies:', error);
-    res.render('index', { title: 'Error fetching movie title' });
+    res.render('index', { title: 'Error fetching movie title', user: req.user  });
   }
 });
 
@@ -36,7 +36,7 @@ router.post('/addfavourite', async function (req, res) {
     }
 
     // Extract data from the request body (e.g., movieTitle, movieYear)
-    const { title, year, plot, rating, type, poster, imdbId } = req.body;
+    const { title, year, plot, rating, type, poster, imdbId} = req.body;
 
     // Prepare the filter and update objects
     const filter = { title: title, year: year };
@@ -47,20 +47,22 @@ router.post('/addfavourite', async function (req, res) {
         plot: plot,
         rating: rating,
         poster: poster,
-        imdbId: imdbId
+        imdbId: imdbId,
+        type: type
       },
     };
 
     const options = { upsert: true };
 
-    // Insert the data into the 'favourites' collection without duplicates
-    if (type === "movie") {
-      await db.collection('movies').findOneAndUpdate(filter, update, options);
-    }
+    // // Insert the data into the 'favourites' collection without duplicates
+    // if (type === "movie") {
+    //   await db.collection('movies').findOneAndUpdate(filter, update, options);
+    // }
 
-    if (type === "series") {
-      await db.collection('series').findOneAndUpdate(filter, update, options);
-    }
+    // if (type === "series") {
+    //   await db.collection('series').findOneAndUpdate(filter, update, options);
+    // }
+      await db.collection(`${req.user.email}`).findOneAndUpdate(filter, update, options);
 
     // Send a success response
     res.status(200).json({ message: 'Favourite added successfully' });

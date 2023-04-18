@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>Register</title>
     <%- include('./partials/head.ejs') %>
     <style>
       .full-height {
@@ -12,20 +12,19 @@
   <body>
     <%- include('./partials/navbar.ejs') %>
     <main class="container d-flex flex-column align-items-center">
-      <h1 class="display-5 text-center">Login User</h1>
-      <form action="/login/authenticate" method="POST">
+      <h1 class="display-5 text-center">Register New User</h1>
+      <form action="/register/adduser" method="POST">
         <div class="mb-3">
-          <label for="inputemail" class="form-label">Email address</label>
-          <input type="email" name="email" class="form-control" id="inputemail" aria-describedby="emailHelp">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text">We'll share your email with everyone else.</div>
         </div>
         <div class="mb-3">
-          <label for="InputPassword" class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" id="InputPassword">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-      <a href="/register">Register new user</a>
     </main>
   </body>
 </html>
