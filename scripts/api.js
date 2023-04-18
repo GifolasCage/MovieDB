@@ -40,31 +40,31 @@ function getApi(){
     });
 }
 
-async function postData(url, data) {
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+// async function postData(url, data) {
+//     try {
+//       const response = await fetch(url, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(data)
+//       });
   
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
+//       if (!response.ok) {
+//         throw new Error(`HTTP error: ${response.status}`);
+//       }
   
-      const responseData = await response.json();
-      console.log('Success:', responseData);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-}
+//       const responseData = await response.json();
+//       console.log('Success:', responseData);
+//     } catch (error) {
+//       console.error('Error:', error);
+//     }
+// }
 
   
-function addToFavourites(){
-    postData('/addfavourite', {title: movieInfo.Title, year: movieInfo.Year, plot: movieInfo.Plot, rating: movieInfo.imdbRating, poster: movieInfo.Poster, type: movieInfo.Type, imdbId: movieInfo.imdbID});
-}
+// function addToFavourites(){
+//     postData('/addfavourite', {title: movieInfo.Title, year: movieInfo.Year, plot: movieInfo.Plot, rating: movieInfo.imdbRating, poster: movieInfo.Poster, type: movieInfo.Type, imdbId: movieInfo.imdbID});
+// }
 
 function showItem(){
   

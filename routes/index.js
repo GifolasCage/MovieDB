@@ -53,16 +53,7 @@ router.post('/addfavourite', async function (req, res) {
     };
 
     const options = { upsert: true };
-
-    // // Insert the data into the 'favourites' collection without duplicates
-    // if (type === "movie") {
-    //   await db.collection('movies').findOneAndUpdate(filter, update, options);
-    // }
-
-    // if (type === "series") {
-    //   await db.collection('series').findOneAndUpdate(filter, update, options);
-    // }
-      await db.collection(`${req.user.email}`).findOneAndUpdate(filter, update, options);
+    await db.collection(`${req.user.email}`).findOneAndUpdate(filter, update, options);
 
     // Send a success response
     res.status(200).json({ message: 'Favourite added successfully' });

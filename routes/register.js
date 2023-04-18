@@ -20,8 +20,11 @@ router.post('/adduser', async (req, res) => {
   const db = await dbConnection();
   const usersCollection = db.collection('users');
 
-  const existingUser = await usersCollection.findOne({ email });
+  if(email === '' || password === ''){
+    return res.status(400).send('Missing username or password');
+  }
 
+  const existingUser = await usersCollection.findOne({ email });
   if (existingUser) {
     return res.status(400).send('User with this email already exists');
   }
