@@ -22,12 +22,12 @@
       }
     </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar.ejs') %>
-    <%if(data.Response==='False') { %>
-        <h1 class="display-5 text-center">Could not find: "<%= searchText %>"</h1>
-    <% }else{ %>
-    <main class="container d-flex flex-column align-items-center">
+    <main class="container d-flex flex-column align-items-center flex-grow-1">
+      <%if(data.Response==='False') { %>
+          <h1 class="display-5 text-center">Could not find: "<%= searchText %>"</h1>
+      <% }else{ %>
       <h1 class="display-5 text-center">Details</h1>
       <div class="d-flex flex-column flex-md-row border rounded p-3 m-2" id="movie-card">
         <img class="img-fluid" src="<%= data.Poster %>" alt="" id="movie-poster">
@@ -59,6 +59,7 @@
       </div>
     </main>
     <% } %>
+    <%- include('./partials/footer.ejs') %>
 </body>
 
 <script>
@@ -70,7 +71,12 @@ function addToFavourites() {
     plot: '<%= data.Plot %>',
     rating: '<%= data.imdbRating %>',
     type: '<%= data.Type %>',
-    imdbId: '<%= data.imdbID %>'
+    imdbId: '<%= data.imdbID %>',
+    director: '<%= data.Director %>',
+    writer: '<%= data.Writer %>',
+    actors: '<%= data.Actors %>',
+    runtime: '<%= data.Runtime %>',
+    genre: '<%= data.Genre %>'
   };
   
   const favouritesBtn = document.getElementById('favouriteBtn');

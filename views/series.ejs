@@ -9,9 +9,9 @@
       }
     </style>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar.ejs') %>
-    <main class="container d-flex flex-column align-items-center">
+    <main class="container d-flex flex-column align-items-center flex-grow-1">
         <table class="table table-striped table-bordered m-3">
             <thead>
                 <tr>
@@ -39,5 +39,6 @@
             </tbody>
         </table>
     </main>
+    <%- include('./partials/footer.ejs') %>
   </body>
 </html>

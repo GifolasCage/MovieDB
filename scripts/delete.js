@@ -1,14 +1,14 @@
 function deleteEntry(itemId, type, title) {
-  let confirmation = confirm(`Are you sure you want to remove: "${title}"?`);
+  let confirmation = confirm(`Are you sure you want to remove: "${title}" from favourites?`);
   if(!confirmation){
     return;
   }
-    fetch(`/deletefavourite/${type}/${itemId}`, {
+    console.log(itemId + ", " + type + ", " + title);
+    fetch(`/deletefavourite/${itemId}`, {
       method: 'DELETE',
     })
       .then((response) => {
         if (response.ok) {
-          // Remove the table row from the DOM
           const button = document.getElementById(itemId);
           button.closest('tr').remove();
         } else {

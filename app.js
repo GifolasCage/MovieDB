@@ -15,6 +15,7 @@ var moviesRouter = require('./routes/movies');
 var seriesRouter = require('./routes/series');
 var logoutRouter = require('./routes/logout');
 var searchRouter = require('./routes/search');
+var posterViewRouter = require('./routes/posterviews');
 
 var app = express();
 
@@ -48,6 +49,7 @@ app.use('/series', seriesRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
 app.use('/search', searchRouter);
+app.use('/posterviews', posterViewRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

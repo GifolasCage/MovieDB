@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search</title>
+    <%- include('./partials/head.ejs') %>
+    <style>
+      .full-height {
+        height: 100vh;
+      }
+      img{
+        transition: 150ms;
+      }
+      img:hover{
+        transform: scale(1.08);
+      }
+      </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <%- include('./partials/navbar.ejs') %>
+    <main class="container d-flex flex-column align-items-center flex-grow-1">
+      <h1 class="display-5 text-center">PosterView</h1>
+      <div class="d-flex flex-column flex-md-row">
+
+          <div class="container" id="poster-panel">
+              <div class="row row-cols-3 row-cols-md-3 w-100 sticky">
+                  <% data.forEach(function(item, index) { %>
+                    <div class="col p-2">
+                        <img class="img-fluid" src="<%= item.poster %>" alt="" onclick="selectItem('<%= index %>')">
+                    </div>
+                    <% }) %>
+                </div>
+              </div>
+                <div class="w-50" id="info-panel">
+                  <p class="fw-bold">Title: <span class="fw-normal" id="movie-title"></span></p>
+                  <p class="fw-bold">Year: <span class="fw-normal" id="movie-year"></span></p>
+                  <p class="fw-bold">Director: <span class="fw-normal" id="movie-director"></span></p>
+                  <p class="fw-bold">Writer: <span class="fw-normal" id="movie-writer"></span></p>
+                  <p class="fw-bold">Actors: <span class="fw-normal" id="movie-actors"></span></p>
+                  <p class="fw-bold">Runtime: <span class="fw-normal" id="movie-runtime"></span></p>
+                  <p class="fw-bold">Plot: <span class="fw-normal" id="movie-plot"></span></p>
+                  <p class="fw-bold">Rating: <span class="fw-normal" id="movie-rating"></span></p>
+                  <p class="fw-bold">Genre: <span class="fw-normal" id="movie-genre"></span></p>
+                  <a href="" id="movie-link" target="_blank" class="btn btn-primary">IMDB</a>
+                </div>  
+            </div>
+    </main>
+    <%- include('./partials/footer.ejs') %>
+
+    <script>
+      const movieData = <%- JSON.stringify(data) %>;
+
+      function selectItem(id) {
+        console.log(movieData[id].imdbId);
+        const movieTitle = document.getElementById('movie-title');
+        const movieYear = document.getElementById('movie-year');
+        const movieDirector = document.getElementById('movie-director');
+        const movieWriter = document.getElementById('movie-writer');
+        const movieActors = document.getElementById('movie-actors');
+        const movieRuntime = document.getElementById('movie-runtime');
+        const moviePlot = document.getElementById('movie-plot');
+        const movieRating = document.getElementById('movie-rating');
+        const movieGenre = document.getElementById('movie-genre');
+        const movieLink = document.getElementById('movie-link');
+
+        movieTitle.innerText = movieData[id].title;
+        movieYear.innerText = movieData[id].year;
+        movieDirector.innerText = movieData[id].director;
+        movieWriter.innerText = movieData[id].writer;
+        movieActors.innerText = movieData[id].actors;
+        movieRuntime.innerText = movieData[id].runtime;
+        moviePlot.innerText = movieData[id].plot;
+        movieRating.innerText = movieData[id].rating;
+        movieGenre.innerText = movieData[id].genre;
+        movieLink.href = `https://www.imdb.com/title/${movieData[id].imdbId}`;
+      };
+
+    </script>
+  </body>
+</html>

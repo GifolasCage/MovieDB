@@ -36,7 +36,7 @@ router.post('/addfavourite', async function (req, res) {
     }
 
     // Extract data from the request body (e.g., movieTitle, movieYear)
-    const { title, year, plot, rating, type, poster, imdbId} = req.body;
+    const { title, year, plot, rating, type, poster, imdbId, director, writer, genre, actors, runtime} = req.body;
 
     // Prepare the filter and update objects
     const filter = { title: title, year: year };
@@ -48,7 +48,12 @@ router.post('/addfavourite', async function (req, res) {
         rating: rating,
         poster: poster,
         imdbId: imdbId,
-        type: type
+        type: type,
+        director: director,
+        writer: writer,
+        genre: genre,
+        actors: actors,
+        runtime: runtime
       },
     };
 
@@ -63,19 +68,14 @@ router.post('/addfavourite', async function (req, res) {
   }
 });
 
-router.delete('/deletefavourite/:type/:id', async function (req, res) {
+router.delete('/deletefavourite/:id', async function (req, res) {
   try {
     if (!db) {
       throw new Error('Database connection is not established');
     }
 
-    // Extract the item ID and type from the request params
     const itemId = req.params.id;
-    const itemType = req.params.type;
-    const collection = itemType === 'movie' ? 'movies' : 'series';
-
-    // Delete the item from the corresponding collection
-    const result = await db.collection(collection).deleteOne({ _id: new ObjectId(itemId) });
+    const result = await db.collection(`${req.user.email}`).deleteOne({ _id: new ObjectId(itemId) });
 
     if (result.deletedCount === 1) {
       res.status(200).json({ message: 'Item deleted successfully' });
