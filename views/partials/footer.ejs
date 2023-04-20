@@ -2,9 +2,10 @@
   <div class="container">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="/movies" class="nav-link px-2 text-muted">My Movies</a></li>
-      <li class="nav-item"><a href="/series" class="nav-link px-2 text-muted">My Series</a></li>
+      <li class="nav-item"><a href="/tableview/movies" class="nav-link px-2 text-muted">My Movies</a></li>
+      <li class="nav-item"><a href="/tableview/series" class="nav-link px-2 text-muted">My Series</a></li>
       <% if(user){ %>
+        <li class="nav-item"><a href="/accountsettings" class="nav-link px-2 text-muted">Account Settings</a></li>
         <li class="nav-item"><a href="/logout" class="nav-link px-2 text-muted">Log out: "<%= user.email %>"</a></li>
         <% } else {%>
       <li class="nav-item"><a href="/login" class="nav-link px-2 text-muted">Login</a></li>

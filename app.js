@@ -11,11 +11,11 @@ var flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
-var moviesRouter = require('./routes/movies');
-var seriesRouter = require('./routes/series');
+var tableviewRouter = require('./routes/tableview');
 var logoutRouter = require('./routes/logout');
 var searchRouter = require('./routes/search');
-var posterViewRouter = require('./routes/posterviews');
+var posterViewRouter = require('./routes/posterview');
+var accountSettingsRouter = require('./routes/accountsettings');
 
 var app = express();
 
@@ -44,12 +44,12 @@ configurePassport(passport);
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
-app.use('/movies', moviesRouter);
-app.use('/series', seriesRouter);
+app.use('/tableview', tableviewRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
 app.use('/search', searchRouter);
-app.use('/posterviews', posterViewRouter);
+app.use('/posterview', posterViewRouter);
+app.use('/accountsettings', accountSettingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

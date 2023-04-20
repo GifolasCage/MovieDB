@@ -10,10 +10,10 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/movies">My Movies</a>
+            <a class="nav-link" aria-current="page" href="/tableview/movies">My Movies</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/series">My Series</a>
+            <a class="nav-link" aria-current="page" href="/tableview/series">My Series</a>
           </li>
           <% if (user) { %>
             <li class="nav-item dropdown">
@@ -21,7 +21,7 @@
                 Account
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Account settings</a></li>
+                <li><a class="dropdown-item" href="/accountsettings">Account settings</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="/logout">Log out: "<%= user.email %>"</a></li>
               </ul>
