@@ -3,46 +3,35 @@
   <head>
     <title>Search</title>
     <%- include('./partials/head.ejs') %>
-    <style>
-      .full-height {
-        height: 100vh;
-      }
-      img{
-        transition: 150ms;
-      }
-      img:hover{
-        transform: scale(1.08);
-      }
-      </style>
+    <link rel="stylesheet" href="../stylesheets/posterview.css">
   </head>
   <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar.ejs') %>
     <main class="container d-flex flex-column align-items-center flex-grow-1">
       <h1 class="display-5 text-center">PosterView</h1>
-      <div class="d-flex flex-column flex-md-row">
 
-          <div class="container" id="poster-panel">
-              <div class="d-flex flex-row overflow-auto">
-                  <% data.forEach(function(item, index) { %>
-                    <div class="col p-2">
-                        <img class="" src="<%= item.poster %>" alt="" onclick="selectItem('<%= index %>')">
-                    </div>
-                    <% }) %>
-                </div>
+      <div class="container" id="poster-panel">
+        <div class="poster-container snap-inline">
+            <% data.forEach(function(item, index) { %>
+              <div>
+                  <img src="<%= item.poster %>" alt="" onclick="selectItem('<%= index %>')">
               </div>
-            </div>
-            <div class="w-50" id="info-panel">
-              <p class="fw-bold">Title: <span class="fw-normal" id="movie-title"></span></p>
-              <p class="fw-bold">Year: <span class="fw-normal" id="movie-year"></span></p>
-              <p class="fw-bold">Director: <span class="fw-normal" id="movie-director"></span></p>
-              <p class="fw-bold">Writer: <span class="fw-normal" id="movie-writer"></span></p>
-              <p class="fw-bold">Actors: <span class="fw-normal" id="movie-actors"></span></p>
-              <p class="fw-bold">Runtime: <span class="fw-normal" id="movie-runtime"></span></p>
-              <p class="fw-bold">Plot: <span class="fw-normal" id="movie-plot"></span></p>
-              <p class="fw-bold">Rating: <span class="fw-normal" id="movie-rating"></span></p>
-              <p class="fw-bold">Genre: <span class="fw-normal" id="movie-genre"></span></p>
-              <a href="" id="movie-link" target="_blank" class="btn btn-primary">IMDB</a>
-            </div>  
+              <% }) %>
+          </div>
+      </div>
+
+      <div class="info-panel" id="">
+        <p class="fw-bold">Title: <span class="fw-normal" id="movie-title"></span></p>
+        <p class="fw-bold">Year: <span class="fw-normal" id="movie-year"></span></p>
+        <p class="fw-bold">Director: <span class="fw-normal" id="movie-director"></span></p>
+        <p class="fw-bold">Writer: <span class="fw-normal" id="movie-writer"></span></p>
+        <p class="fw-bold">Actors: <span class="fw-normal" id="movie-actors"></span></p>
+        <p class="fw-bold">Runtime: <span class="fw-normal" id="movie-runtime"></span></p>
+        <p class="fw-bold">Plot: <span class="fw-normal" id="movie-plot"></span></p>
+        <p class="fw-bold">Rating: <span class="fw-normal" id="movie-rating"></span></p>
+        <p class="fw-bold">Genre: <span class="fw-normal" id="movie-genre"></span></p>
+        <a href="" id="movie-link" target="_blank" class="btn btn-primary">IMDB</a>
+      </div>  
     </main>
     <%- include('./partials/footer.ejs') %>
 

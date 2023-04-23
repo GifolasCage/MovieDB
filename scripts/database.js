@@ -1,6 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://127.0.0.1:27017';
-const dbName = 'entertainment';
+require('dotenv').config();
+
+const url = process.env.DB_URL;
+const dbName = process.env.DB_NAME;
 
 const dbConnection = async () => {
   try {

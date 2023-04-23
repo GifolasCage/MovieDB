@@ -4,6 +4,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const dbConnection = require('../scripts/database');
 const configurePassport = require('../scripts/passportconfig');
+const { ObjectId } = require('mongodb');
 
 configurePassport(passport);
 
@@ -34,6 +35,8 @@ router.post('/adduser', async (req, res) => {
   const newUser = {
     email,
     password: hashedPassword,
+    name: "",
+    view: "tableview"
   };
 
   try {
@@ -44,4 +47,33 @@ router.post('/adduser', async (req, res) => {
   }
 });
 
+router.post('/edituser', async (req, res) => {
+  const { id, email, name, view, password } = req.body;
+  const db = await dbConnection();
+  const usersCollection = db.collection('users');
+
+  if (!id || email === '') {
+    return res.status(400).send('Missing user ID or email');
+  }
+
+  const updateQuery = {
+    $set: {
+      email,
+      name,
+      view
+    }
+  };
+
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    updateQuery.$set.password = hashedPassword;
+  }
+
+  try {
+    await usersCollection.updateOne({ _id: new ObjectId(id) }, updateQuery);
+    res.redirect('/');
+  } catch (err) {
+    res.status(500).send('Error updating user');
+  }
+});
 module.exports = router;

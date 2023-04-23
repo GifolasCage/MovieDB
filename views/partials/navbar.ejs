@@ -9,13 +9,13 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/tableview/movies">My Movies</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/tableview/series">My Series</a>
-          </li>
           <% if (user) { %>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/<%= user.view %>/movies">My Movies</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/<%= user.view %>/series">My Series</a>
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Account
@@ -28,6 +28,12 @@
             </li>
             </ul>
             <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/tableview/movies">My Movies</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/tableview/series">My Series</a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="/login">Login</a>
               </li>

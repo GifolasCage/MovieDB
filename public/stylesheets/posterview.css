@@ -1,0 +1,52 @@
+.full-height {
+    height: 100vh;
+  }
+
+  img{
+    padding: 1rem;
+    width: 10rem;
+    aspect-ratio: 11/16;
+    object-fit: cover;
+    transition: 150ms;
+    user-select: none;
+  }
+
+  img:hover{
+    transform: scale(1.08);
+  }
+
+  .poster-container{
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
+  .info-panel{
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .snap-inline{
+    scroll-snap-type: inline mandatory;
+  }
+
+  .snap-inline > *{
+    scroll-snap-align: start;
+  }
+
+  .poster-container::-webkit-scrollbar{
+    height: 1rem;
+  }
+
+  .poster-container::-webkit-scrollbar-track{
+    background: hsl(0, 0%, 69%);
+    border-radius: .5rem;
+  }
+
+  .poster-container::-webkit-scrollbar-thumb{
+    background: hsl(0, 0%, 46%);
+    border: .2rem solid hsl(0, 0%, 69%);
+    border-radius: .5rem;
+  }
+  

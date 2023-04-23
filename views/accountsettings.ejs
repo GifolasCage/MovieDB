@@ -5,12 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="../stylesheets/accountinfo.css">
     <title>Account Settings</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar.ejs') %>
     <main class="container d-flex flex-column align-items-center flex-grow-1">
       <h1 class="display-5 text-center">Account Settings</h1>
+      <div class="account-info">
+        <form action="/register/edituser" method="POST">
+          <input type="hidden" name="id" value="<%= user._id %>">
+          <div class="input-block">
+            <label for="username">Username:</label>
+            <input type="email" name="email" id="username" value="<%= user.email %>">
+          </div>
+          <div class="input-block">
+            <label for="password">New Password:</label>
+            <input type="password" name="password" id="password" placeholder="Enter new password to change">
+          </div>
+          <div class="input-block">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="<%= user.name %>">
+          </div>
+          <div class="input-block">
+            <label for="view">Viewtype:</label>
+            <select name="view" id="view">
+              <option value="tableview" <%= user.view === 'tableview' ? 'selected' : '' %>>Tableview</option>
+              <option value="posterview" <%= user.view === 'posterview' ? 'selected' : '' %>>Posterview</option>
+            </select>
+          </div>
+          <div class="input-block">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
     </main>
     <%- include('./partials/footer.ejs') %>
 </body>
