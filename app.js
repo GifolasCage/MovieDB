@@ -36,7 +36,14 @@ app.use(express.static(__dirname + '/scripts'));
 app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  proxy: true, 
+    name: 'movieDBcookies', 
+    cookie: {
+      secure: true,
+      httpOnly: false,
+      sameSite: 'none'
+    }
 }));
 
 app.use(passport.initialize());
