@@ -33,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/scripts'));
 
+app.set("trust proxy", 1);
+
 app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
@@ -42,6 +44,7 @@ app.use(session({
     cookie: {
       secure: true,
       httpOnly: false,
+      maxAge: 1000 * 60 * 60 * 48,
       sameSite: 'none'
     }
 }));
