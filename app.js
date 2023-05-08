@@ -8,6 +8,7 @@ var session = require('express-session');
 var configurePassport = require('./scripts/passportconfig');
 var flash = require('connect-flash');
 require('dotenv').config();
+const { CyclicSessionStore } = require("@cyclic.sh/session-store");
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
@@ -33,20 +34,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/scripts'));
 
-app.set("trust proxy", 1);
+const options = {
+  table: {
+    name: process.env.CYCLIC_DB,
+  }
+};
 
 app.use(session({
+  store: new CyclicSessionStore(options),
   secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: true,
-  proxy: true, 
-    name: 'movieDBcookies', 
-    cookie: {
-      secure: true,
-      httpOnly: false,
-      maxAge: 1000 * 60 * 60 * 48,
-      sameSite: 'none'
-    }
 }));
 
 app.use(passport.initialize());
