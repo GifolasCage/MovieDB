@@ -48,7 +48,7 @@ router.post('/adduser', async (req, res) => {
 });
 
 router.post('/edituser', async (req, res) => {
-  const { id, email, name, view, password } = req.body;
+  const { id, email, name, view, password, bio } = req.body;
   const db = await dbConnection();
   const usersCollection = db.collection('users');
 
@@ -60,7 +60,8 @@ router.post('/edituser', async (req, res) => {
     $set: {
       email,
       name,
-      view
+      view,
+      bio
     }
   };
 

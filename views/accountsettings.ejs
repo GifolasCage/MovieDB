@@ -35,7 +35,12 @@
             </select>
           </div>
           <div class="input-block">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <label for="bio">Bio:</label>
+            <textarea name="bio" id="bio" cols="30" rows="10"><%= user.bio %></textarea>
+          </div>
+          <div class="input-btn d-flex">
+            <button type="submit" class="btn btn-primary button">Submit</button>
+            <button type="reset" class="btn btn-danger button">Reset</button>
           </div>
         </form>
       </div>

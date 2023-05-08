@@ -4,15 +4,12 @@
     <title>Search</title>
     <%- include('./partials/head.ejs') %>
     <style>
-      .full-height {
-        height: 100vh;
-      }
     </style>
   </head>
-  <body class="d-flex flex-column min-vh-100">
+  <body class="d-flex flex-column min-vh-100" data-bs-theme="">
     <%- include('./partials/navbar.ejs') %>
     <main class="container d-flex flex-column align-items-center flex-grow-1">
-      <h1 class="display-5 text-center">Search Movie or Tv-Show</h1>
+      <h1 class="display-5 text-center p-3">Search Movie or Tv-Show</h1>
       <form class="form-group w-50" method="POST" action="/search">
         <input type="text" id="search-text" name="search" class="form-control" placeholder="Title e.g. Star Wars">
         <button class="text-center btn btn-primary m-2" type="submit" onclick="">Search</button>

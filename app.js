@@ -7,6 +7,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var configurePassport = require('./scripts/passportconfig');
 var flash = require('connect-flash');
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
@@ -33,7 +34,7 @@ app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/scripts'));
 
 app.use(session({
-  secret: 'extremely secret key that nobody knows',
+  secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: true
 }));
