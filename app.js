@@ -42,7 +42,7 @@ app.use(session({
   proxy: true, 
     name: 'movieDBcookies', 
     cookie: {
-      secure: false,
+      secure: true,
       httpOnly: false,
       maxAge: 1000 * 60 * 60 * 48,
       sameSite: 'none'
