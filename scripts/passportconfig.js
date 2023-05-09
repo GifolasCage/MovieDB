@@ -1,8 +1,9 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const dbConnection = require('../scripts/database');
+const ObjectId = require('mongodb').ObjectId;
 
-const configurePassport = (passport) => {
+const configurePassport = (passport, db) => {
   passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
       const db = await dbConnection();
@@ -32,7 +33,7 @@ const configurePassport = (passport) => {
     try {
       const db = await dbConnection();
       const usersCollection = db.collection('users');
-      const user = await usersCollection.findOne({ _id: new require('mongodb').ObjectID(id) });
+      const user = await usersCollection.findOne({ _id: new ObjectId(id) });
       done(null, user);
     } catch (err) {
       done(err);

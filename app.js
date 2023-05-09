@@ -5,10 +5,11 @@ var passport = require('passport')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
 var configurePassport = require('./scripts/passportconfig');
+const dbConnection = require('./scripts/database');
 var flash = require('connect-flash');
 require('dotenv').config();
-const { CyclicSessionStore } = require("@cyclic.sh/session-store");
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
@@ -34,19 +35,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/scripts'));
 
-const options = {
-  table: {
-    name: process.env.CYCLIC_DB,
-  }
-};
+var store = new MongoDBStore({
+  uri: process.env.DB_URL,
+  databaseName: process.env.DB_NAME,
+  collection: 'mySessions'
+});
 
 app.use(session({
-  store: new CyclicSessionStore(options),
   secret: process.env.SECRET_KEY,
-  resave: false,
-  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  resave: true,
+  saveUninitialized: true
 }));
 
+  
 app.use(passport.initialize());
 app.use(passport.session());
 configurePassport(passport);
