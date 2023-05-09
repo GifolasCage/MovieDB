@@ -3,17 +3,18 @@
   <head>
     <title>Search</title>
     <%- include('./partials/head.ejs') %>
-    <style>
-    </style>
   </head>
   <body class="d-flex flex-column min-vh-100" data-bs-theme="">
     <%- include('./partials/navbar.ejs') %>
     <main class="container d-flex flex-column align-items-center flex-grow-1">
       <h1 class="display-5 text-center p-3">Search Movie or Tv-Show</h1>
-      <form class="form-group w-50" method="POST" action="/search">
-        <input type="text" id="search-text" name="search" class="form-control" placeholder="Title e.g. Star Wars">
-        <button class="text-center btn btn-primary m-2" type="submit" onclick="">Search</button>
-      </form>
+      <div class="row justify-content-center w-100">
+        <form class="form-group col-md-6 col-12 d-flex flex-column align-items-center" method="POST" action="/search">
+          <input type="text" id="search-text" name="search" class="form-control form-control-lg" placeholder="Title e.g. Star Wars">
+          <button class="btn btn-lg btn-primary m-2 w-100" type="submit">Search</button>
+        </form>
+        <p class="text-center pt-5 fs-5">Here you search for movies and series using OMDB API. <br> You can create a user and log in to add them to your favourites.</p>
+      </div>
     </main>
     <%- include('./partials/footer.ejs') %>
   </body>

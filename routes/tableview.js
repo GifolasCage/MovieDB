@@ -12,7 +12,7 @@ let db;
   }
 })();
 
-router.get('/:id', async function(req, res, next) {
+router.get('/:id', async (req, res, next) => {
   if(req.user){
     try {
       if (!db) {

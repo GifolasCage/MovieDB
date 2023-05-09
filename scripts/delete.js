@@ -1,4 +1,4 @@
-function deleteEntry(itemId, type, title) {
+function deleteEntry(itemId, type, title, view) {
   let confirmation = confirm(`Are you sure you want to remove: "${title}" from favourites?`);
   if(!confirmation){
     return;
@@ -10,7 +10,12 @@ function deleteEntry(itemId, type, title) {
       .then((response) => {
         if (response.ok) {
           const button = document.getElementById(itemId);
-          button.closest('tr').remove();
+          if(view === "table"){
+            button.closest('tr').remove();
+          }
+          if(view === "poster"){
+            window.location.reload()
+          }
         } else {
           throw new Error('Error while deleting item');
         }

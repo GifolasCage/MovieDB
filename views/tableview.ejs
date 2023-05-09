@@ -41,7 +41,7 @@
                     <td><%= item.rating %>/10</td>
                     <td><img src="<%= item.poster %>" alt="Movie Poster" width="100"></td>
                     <td><a href="https://www.imdb.com/title/<%= item.imdbId %>" target="_blank" class="btn btn-primary">Imdb</a></td>
-                    <td><button class="btn btn-danger" id="<%= item._id %>" onclick="deleteEntry(this.id, 'movie', '<%=item.title%>')">Delete</button></td>
+                    <td><button class="btn btn-danger" id="<%= item._id %>" onclick="deleteEntry(this.id, 'movie', '<%=item.title%>', 'table')">Delete</button></td>
                 </tr>
                 <% }) %>
             </tbody>
