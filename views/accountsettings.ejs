@@ -11,7 +11,7 @@
 <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar.ejs') %>
     <main class="container d-flex flex-column align-items-center flex-grow-1">
-      <h1 class="display-5 text-center">Account Settings</h1>
+      <h1 class="display-5 text-center">Account Settings:</h1>
       <div class="account-info">
         <form action="/register/edituser" method="POST">
           <input type="hidden" name="id" value="<%= user._id %>">

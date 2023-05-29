@@ -1,27 +1,27 @@
-.account-info{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.account-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.input-block{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0.5rem;
+.input-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5rem;
 }
 
-.input-btn{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
+.input-btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
-.button{
-    width: 100%;
-    margin: 1rem;
+.button {
+  width: 100%;
+  margin: 1rem;
 }
 
-label{
-    font-weight: 600;
+label {
+  font-weight: 600;
 }

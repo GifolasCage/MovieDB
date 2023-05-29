@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= data.Title %></title>
     <%- include('./partials/head.ejs') %>
     <style>
       .full-height {
         height: 100vh;
       }
-      p{
+      p {
         padding: 5px;
         margin: 5px;
         border-bottom: 1px solid rgba(179, 179, 179, 0.495);
@@ -21,93 +21,145 @@
         object-fit: contain;
       }
     </style>
-</head>
-<body class="d-flex flex-column min-vh-100">
+  </head>
+  <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar.ejs') %>
     <main class="container d-flex flex-column align-items-center flex-grow-1">
       <%if(data.Response==='False') { %>
-          <h1 class="display-5 text-center">Could not find: "<%= searchText %>"</h1>
+      <h1 class="display-5 text-center">Could not find: "<%= searchText %>"</h1>
       <% }else{ %>
       <h1 class="display-5 text-center">Details</h1>
-      <div class="d-flex flex-column flex-md-row border rounded p-3 m-2" id="movie-card">
-        <img class="img-fluid" src="<%= data.Poster %>" alt="" id="movie-poster">
+      <div
+        class="d-flex flex-column flex-md-row border rounded p-3 m-2"
+        id="movie-card"
+      >
+        <img
+          class="img-fluid"
+          src="<%= data.Poster %>"
+          alt=""
+          id="movie-poster"
+        />
         <div class="d-flex flex-column ps-2 justify-content-between" style="">
           <div>
-            <p class="fw-bold">Title: <span class="fw-normal" id="movie-title"><%= data.Title %></span></p>
-            <p class="fw-bold">Year: <span class="fw-normal" id="movie-year"><%= data.Year %></span></p>
-            <p class="fw-bold">Director: <span class="fw-normal" id="movie-year"><%= data.Director %></span></p>
-            <p class="fw-bold">Writer: <span class="fw-normal" id="movie-year"><%= data.Writer %></span></p>
-            <p class="fw-bold">Actors: <span class="fw-normal" id="movie-year"><%= data.Actors %></span></p>
-            <p class="fw-bold">Runtime: <span class="fw-normal" id="movie-year"><%= data.Runtime %></span></p>
-            <p class="fw-bold">Plot: <span class="fw-normal" id="movie-plot"><%= data.Plot %></span></p>
-            <p class="fw-bold">Rating: <span class="fw-normal" id="movie-rating"><%= data.imdbRating %></span></p>
-            <p class="fw-bold">Genre: <span class="fw-normal" id="movie-rating"><%= data.Genre %></span></p>
+            <p class="fw-bold">
+              Title:
+              <span class="fw-normal" id="movie-title"><%= data.Title %></span>
+            </p>
+            <p class="fw-bold">
+              Year:
+              <span class="fw-normal" id="movie-year"><%= data.Year %></span>
+            </p>
+            <p class="fw-bold">
+              Director:
+              <span class="fw-normal" id="movie-year"
+                ><%= data.Director %></span
+              >
+            </p>
+            <p class="fw-bold">
+              Writer:
+              <span class="fw-normal" id="movie-year"><%= data.Writer %></span>
+            </p>
+            <p class="fw-bold">
+              Actors:
+              <span class="fw-normal" id="movie-year"><%= data.Actors %></span>
+            </p>
+            <p class="fw-bold">
+              Runtime:
+              <span class="fw-normal" id="movie-year"><%= data.Runtime %></span>
+            </p>
+            <p class="fw-bold">
+              Plot:
+              <span class="fw-normal" id="movie-plot"><%= data.Plot %></span>
+            </p>
+            <p class="fw-bold">
+              Rating:
+              <span class="fw-normal" id="movie-rating"
+                ><%= data.imdbRating %></span
+              >
+            </p>
+            <p class="fw-bold">
+              Genre:
+              <span class="fw-normal" id="movie-rating"><%= data.Genre %></span>
+            </p>
           </div>
           <% if(user) { %>
-            <div class="d-flex justify-content-evenly">
-                <a class="btn btn-primary" href="https://www.imdb.com/title/<%= data.imdbID %>">IMDB</a>
-                <% if (isFavourite) { %>
-                <button id="favouriteBtn" class="btn btn-primary" disabled>Already in favourites</button>
-                <% } else { %>
-                <button id="favouriteBtn" class="btn btn-primary" onclick="addToFavourites()">Add to favourites</button>
-                <% } %>
-            </div>
-          <% } %>
-          <% if(!user) { %>
-            <div class="d-flex justify-content-evenly">
-                <a class="btn btn-primary" href="https://www.imdb.com/title/<%= data.imdbID %>">IMDB</a>
-                <a class="btn btn-secondary" href="/login" target="_blank">Log in to add to favourites</a>
-            </div>
+          <div class="d-flex justify-content-evenly">
+            <a
+              class="btn btn-primary"
+              href="https://www.imdb.com/title/<%= data.imdbID %>"
+              >IMDB</a
+            >
+            <% if (isFavourite) { %>
+            <button id="favouriteBtn" class="btn btn-primary" disabled>
+              Already in favourites
+            </button>
+            <% } else { %>
+            <button
+              id="favouriteBtn"
+              class="btn btn-primary"
+              onclick="addToFavourites()"
+            >
+              Add to favourites
+            </button>
+            <% } %>
+          </div>
+          <% } %> <% if(!user) { %>
+          <div class="d-flex justify-content-evenly">
+            <a
+              class="btn btn-primary"
+              href="https://www.imdb.com/title/<%= data.imdbID %>"
+              >IMDB</a
+            >
+            <a class="btn btn-secondary" href="/login" target="_blank"
+              >Log in to add to favourites</a
+            >
+          </div>
           <% } %>
         </div>
       </div>
     </main>
-    <% } %>
-    <%- include('./partials/footer.ejs') %>
-</body>
+    <% } %> <%- include('./partials/footer.ejs') %>
+  </body>
 
-<script>
+  <script>
+    function addToFavourites() {
+      const data = {
+        title: "<%= data.Title %>",
+        poster: "<%= data.Poster %>",
+        year: "<%= data.Year %>",
+        plot: "<%= data.Plot %>",
+        rating: "<%= data.imdbRating %>",
+        type: "<%= data.Type %>",
+        imdbId: "<%= data.imdbID %>",
+        director: "<%= data.Director %>",
+        writer: "<%= data.Writer %>",
+        actors: "<%= data.Actors %>",
+        runtime: "<%= data.Runtime %>",
+        genre: "<%= data.Genre %>",
+      };
 
-function addToFavourites() {
-  const data = {
-    title: '<%= data.Title %>',
-    poster: '<%= data.Poster %>',
-    year: '<%= data.Year %>',
-    plot: '<%= data.Plot %>',
-    rating: '<%= data.imdbRating %>',
-    type: '<%= data.Type %>',
-    imdbId: '<%= data.imdbID %>',
-    director: '<%= data.Director %>',
-    writer: '<%= data.Writer %>',
-    actors: '<%= data.Actors %>',
-    runtime: '<%= data.Runtime %>',
-    genre: '<%= data.Genre %>'
-  };
-  
-  const favouritesBtn = document.getElementById('favouriteBtn');
+      const favouritesBtn = document.getElementById("favouriteBtn");
 
-  fetch('/addfavourite', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => {
-    if (response.ok) {
-      favouritesBtn.textContent = 'Added to favourites';
-      favouritesBtn.disabled = true;
+      fetch("/addfavourite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.ok) {
+            favouritesBtn.textContent = "Added to favourites";
+            favouritesBtn.disabled = true;
+          }
+          return response.json();
+        })
+        .then((result) => {})
+        .catch((error) => {
+          favouritesBtn.textContent = "Error adding to favourites";
+          favouritesBtn.disabled = true;
+          console.error("Error:", error);
+        });
     }
-    return response.json();
-  })
-  .then(result => {
-  })
-  .catch(error => {
-    favouritesBtn.textContent = 'Error adding to favourites';
-    favouritesBtn.disabled = true;
-    console.error('Error:', error);
-  });
-}
   </script>
-
 </html>

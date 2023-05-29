@@ -1,9 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const axios = require('axios');
-require('dotenv').config();
+const axios = require("axios");
+require("dotenv").config();
 
-var connectToDB = require('../scripts/database');
+var connectToDB = require("../scripts/database");
 const apikey = process.env.API_KEY;
 
 let db;
@@ -12,40 +12,48 @@ let db;
   try {
     db = await connectToDB();
   } catch (error) {
-    console.log('Error while connecting to the database:', error);
+    console.log("Error while connecting to the database:", error);
   }
 })();
 
-router.get('/', (req, res) =>{
-    res.send("You must enter a search query...");
+router.get("/", (req, res) => {
+  res.send("You must enter a search query...");
 });
 
-router.get('/:id', async (req, res) => {
-    axios.get(`https://www.omdbapi.com/?apikey=${apikey}&t=${req.params.id}`)
-        .then(async (response) => {
-            console.log(response.data);
-            let isFavourite = false;
+router.get("/:id", async (req, res) => {
+  // Get moviedata from OMDB API
+  axios
+    .get(`https://www.omdbapi.com/?apikey=${apikey}&t=${req.params.id}`)
+    .then(async (response) => {
+      console.log(response.data);
+      let isFavourite = false;
+      // Check if thee user has already favourited the movie/seriees
+      if (req.user) {
+        try {
+          const movie = await db
+            .collection(req.user.email)
+            .findOne({ imdbId: response.data.imdbID });
+          isFavourite = movie != null;
+        } catch (error) {
+          console.log("Error while checking movie in the database:", error);
+        }
+      }
 
-            if (req.user) {
-                try {
-                    const movie = await db.collection(req.user.email).findOne({ imdbId: response.data.imdbID });
-                    isFavourite = movie != null;
-                } catch (error) {
-                    console.log('Error while checking movie in the database:', error);
-                }
-            }
-
-            res.render('search', {data: response.data, user: req.user, searchText: req.params.id, isFavourite});
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+      res.render("search", {
+        data: response.data,
+        user: req.user,
+        searchText: req.params.id,
+        isFavourite,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
-
-router.post('/', (req, res) => {
-    const data = req.body;
-    res.redirect(`/search/${data.search}`);
+router.post("/", (req, res) => {
+  const data = req.body;
+  res.redirect(`/search/${data.search}`);
 });
 
 module.exports = router;

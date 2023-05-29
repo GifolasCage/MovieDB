@@ -1,6 +1,6 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var connectToDB = require('../scripts/database');
+var connectToDB = require("../scripts/database");
 
 let db;
 
@@ -8,35 +8,52 @@ let db;
   try {
     db = await connectToDB();
   } catch (error) {
-    console.log('Error while connecting to the database:', error);
+    console.log("Error while connecting to the database:", error);
   }
 })();
 
-router.get('/:id', async (req, res, next) => {
-  if(req.user){
+router.get("/:id", async (req, res, next) => {
+  if (req.user) {
     try {
       if (!db) {
-        throw new Error('Database connection is not established');
+        throw new Error("Database connection is not established");
       }
-      
+
       //render tableview for favourite movies.
-      if(req.params.id === 'movies'){
-        const movies = await db.collection(req.user.email).find({type:"movie"}).toArray();
-        res.render('tableview', { title: 'Favorite Movies', data: movies, user: req.user });
+      if (req.params.id === "movies") {
+        const movies = await db
+          .collection(req.user.email)
+          .find({ type: "movie" })
+          .toArray();
+        res.render("tableview", {
+          title: "Favorite Movies",
+          data: movies,
+          user: req.user,
+        });
         //render tableview for favourite series.
-      }else if(req.params.id === 'series'){
-        const series = await db.collection(req.user.email).find({type:"series"}).toArray();
-        res.render('tableview', { title: 'Favorite Series', data: series, user: req.user });
-      }else{
-        res.send('404......');
+      } else if (req.params.id === "series") {
+        const series = await db
+          .collection(req.user.email)
+          .find({ type: "series" })
+          .toArray();
+        res.render("tableview", {
+          title: "Favorite Series",
+          data: series,
+          user: req.user,
+        });
+      } else {
+        res.send("404......");
       }
     } catch (error) {
-      console.log('Error while fetching favourites', error);
-      res.render('tableview', { title: 'Error fetching favourites', user: req.user });
+      console.log("Error while fetching favourites", error);
+      res.render("tableview", {
+        title: "Error fetching favourites",
+        user: req.user,
+      });
     }
-  }
-  else{
-    res.redirect('/login');
+  } else {
+    // if user is not logged in redirect to login page
+    res.redirect("/login");
   }
 });
 

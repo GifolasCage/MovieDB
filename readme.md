@@ -5,10 +5,11 @@
 This is a project for teaching myself express and mongodb. You can search for movies and series using the OMDBapi. You can create a user to add movies and series to your favourites. The movies are then added to a new mongodb collection for your username. The application uses mongodb for storing the session.
 
 ### Built With
-* [![MongoDB][MongoDB.com]][MongoDB-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![ExpressJs][Expressjs.com]][Expressjs-url]
-* [![EJS][Ejs.com]][Ejs-url]
+
+- [![MongoDB][MongoDB.com]][MongoDB-url]
+- [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+- [![ExpressJs][Expressjs.com]][Expressjs-url]
+- [![EJS][Ejs.com]][Ejs-url]
 
 ### Installation and running
 
@@ -18,7 +19,8 @@ This is a project for teaching myself express and mongodb. You can search for mo
    npm install
    ```
 3. ```
-    have mongodb installed and running
+   have mongodb installed and running
+   ```
 4. Run the app
    ```js
    npm start
@@ -29,6 +31,7 @@ This is a project for teaching myself express and mongodb. You can search for mo
    ```
 
 ### Environment variables
+
 ```sh
 API_KEY=YOUR_OMDB_API_KEY
 DB_URL=YOUR_MONGODB_URL
@@ -39,17 +42,18 @@ SECRET_KEY=YOUR_VERY_SECRET_SESSION_KEY
 ```
 
 ### Acknowledgements
-* dotenv
-* connect-mongodb-session
-* bcrypt
-* axios
-* body-parser
-* express-session
-* express-session-JSON
-* passport
-* passport-local
-* morgan
-* https://www.omdbapi.com/
+
+- dotenv
+- connect-mongodb-session
+- bcrypt
+- axios
+- body-parser
+- express-session
+- express-session-JSON
+- passport
+- passport-local
+- morgan
+- https://www.omdbapi.com/
 
 [MongoDB.com]: https://img.shields.io/badge/mongodb-0d5e4f?style=for-the-badge&logo=mongodb&logoColor=white
 [MongoDB-url]: https://mongodb.com

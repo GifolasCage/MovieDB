@@ -3,7 +3,7 @@
   <head>
     <title>Search</title>
     <%- include('./partials/head.ejs') %>
-    <link rel="stylesheet" href="../stylesheets/posterview.css">
+    <link rel="stylesheet" href="../stylesheets/posterview.css" />
   </head>
   <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar.ejs') %>
@@ -11,34 +11,63 @@
       <h1 class="display-5 text-center">PosterView</h1>
 
       <% if (data.length === 0) { %>
-        <div class="info-panel" id="">
-          <h1 class="display-5 text-center">No favourites</h1>
-          <h1 class="display-5 text-center">Search to add movies or series</h1>
-        </div>  
+      <div class="info-panel" id="">
+        <h1 class="display-5 text-center">No favourites</h1>
+        <h1 class="display-5 text-center">Search to add movies or series</h1>
+      </div>
       <% } else { %>
-        <div class="container" id="poster-panel">
-          <div class="poster-container snap-inline">
-              <% data.forEach(function(item, index) { %>
-                <div id="<%= item._id %>">
-                    <img src="<%= item.poster %>" alt="" onclick="selectItem('<%= index %>')">
-                </div>
-                <% }) %>
-            </div>
+      <div class="container" id="poster-panel">
+        <div class="poster-container snap-inline">
+          <% data.forEach(function(item, index) { %>
+          <div id="<%= item._id %>">
+            <img
+              src="<%= item.poster %>"
+              alt=""
+              onclick="selectItem('<%= index %>')"
+            />
+          </div>
+          <% }) %>
         </div>
-      
+      </div>
 
       <div class="info-panel" id="">
-        <p class="fw-bold">Title: <span class="fw-normal" id="movie-title"></span></p>
-        <p class="fw-bold">Year: <span class="fw-normal" id="movie-year"></span></p>
-        <p class="fw-bold">Director: <span class="fw-normal" id="movie-director"></span></p>
-        <p class="fw-bold">Writer: <span class="fw-normal" id="movie-writer"></span></p>
-        <p class="fw-bold">Actors: <span class="fw-normal" id="movie-actors"></span></p>
-        <p class="fw-bold">Runtime: <span class="fw-normal" id="movie-runtime"></span></p>
-        <p class="fw-bold">Plot: <span class="fw-normal" id="movie-plot"></span></p>
-        <p class="fw-bold">Rating: <span class="fw-normal" id="movie-rating"></span></p>
-        <p class="fw-bold">Genre: <span class="fw-normal" id="movie-genre"></span></p>
-        <a href="" id="movie-link" target="_blank" class="btn btn-primary">IMDB</a>
-        <button class="btn btn-danger" id="movie-delete" onclick="deleteEntry()">Delete</button>
+        <p class="fw-bold">
+          Title: <span class="fw-normal" id="movie-title"></span>
+        </p>
+        <p class="fw-bold">
+          Year: <span class="fw-normal" id="movie-year"></span>
+        </p>
+        <p class="fw-bold">
+          Director: <span class="fw-normal" id="movie-director"></span>
+        </p>
+        <p class="fw-bold">
+          Writer: <span class="fw-normal" id="movie-writer"></span>
+        </p>
+        <p class="fw-bold">
+          Actors: <span class="fw-normal" id="movie-actors"></span>
+        </p>
+        <p class="fw-bold">
+          Runtime: <span class="fw-normal" id="movie-runtime"></span>
+        </p>
+        <p class="fw-bold">
+          Plot: <span class="fw-normal" id="movie-plot"></span>
+        </p>
+        <p class="fw-bold">
+          Rating: <span class="fw-normal" id="movie-rating"></span>
+        </p>
+        <p class="fw-bold">
+          Genre: <span class="fw-normal" id="movie-genre"></span>
+        </p>
+        <a href="" id="movie-link" target="_blank" class="btn btn-primary"
+          >IMDB</a
+        >
+        <button
+          class="btn btn-danger"
+          id="movie-delete"
+          onclick="deleteEntry()"
+        >
+          Delete
+        </button>
       </div>
       <% } %>
     </main>
@@ -77,7 +106,6 @@
         console.log(movieDelete);
         movieDelete.setAttribute('onclick', `deleteEntry('${movieData[id]._id}','${movieData[id].type}', '${movieData[id].title}', 'poster')`);
       };
-
     </script>
   </body>
 </html>

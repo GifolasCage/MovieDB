@@ -1,33 +1,33 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport = require('passport');
-const bcrypt = require('bcrypt');
-const dbConnection = require('../scripts/database');
-const configurePassport = require('../scripts/passportconfig');
-const { ObjectId } = require('mongodb');
+const passport = require("passport");
+const bcrypt = require("bcrypt");
+const dbConnection = require("../scripts/database");
+const configurePassport = require("../scripts/passportconfig");
+const { ObjectId } = require("mongodb");
 
 configurePassport(passport);
 
-router.get('/', function (req, res, next) {
-    if(req.user){
-        res.redirect('/');
-    }else{
-        res.render('register', {user: req.user });
-    }
+router.get("/", function (req, res, next) {
+  if (req.user) {
+    res.redirect("/");
+  } else {
+    res.render("register", { user: req.user });
+  }
 });
 
-router.post('/adduser', async (req, res) => {
+router.post("/adduser", async (req, res) => {
   const { email, password } = req.body;
   const db = await dbConnection();
-  const usersCollection = db.collection('users');
+  const usersCollection = db.collection("users");
 
-  if(email === '' || password === ''){
-    return res.status(400).send('Missing username or password');
+  if (email === "" || password === "") {
+    return res.status(400).send("Missing username or password");
   }
 
   const existingUser = await usersCollection.findOne({ email });
   if (existingUser) {
-    return res.status(400).send('User with this email already exists');
+    return res.status(400).send("User with this email already exists");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -36,24 +36,24 @@ router.post('/adduser', async (req, res) => {
     email,
     password: hashedPassword,
     name: "",
-    view: "tableview"
+    view: "tableview",
   };
 
   try {
     await usersCollection.insertOne(newUser);
-    res.redirect('/');
+    res.redirect("/");
   } catch (err) {
-    res.status(500).send('Error adding user to database');
+    res.status(500).send("Error adding user to database");
   }
 });
 
-router.post('/edituser', async (req, res) => {
+router.post("/edituser", async (req, res) => {
   const { id, email, name, view, password, bio } = req.body;
   const db = await dbConnection();
-  const usersCollection = db.collection('users');
+  const usersCollection = db.collection("users");
 
-  if (!id || email === '') {
-    return res.status(400).send('Missing user ID or email');
+  if (!id || email === "") {
+    return res.status(400).send("Missing user ID or email");
   }
 
   const updateQuery = {
@@ -61,8 +61,8 @@ router.post('/edituser', async (req, res) => {
       email,
       name,
       view,
-      bio
-    }
+      bio,
+    },
   };
 
   if (password) {
@@ -72,9 +72,9 @@ router.post('/edituser', async (req, res) => {
 
   try {
     await usersCollection.updateOne({ _id: new ObjectId(id) }, updateQuery);
-    res.redirect('/');
+    res.redirect("/");
   } catch (err) {
-    res.status(500).send('Error updating user');
+    res.status(500).send("Error updating user");
   }
 });
 module.exports = router;
